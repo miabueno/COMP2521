@@ -1,0 +1,27 @@
+
+#include "list.h"
+
+void listReverse(List l) {
+
+    if (l->head == NULL) return;
+
+    Node first = l->head;
+    Node rest = l->head->next;
+    
+    if (rest == NULL) return;
+    
+    first->next = NULL;
+    
+    while (rest != NULL) {
+        
+        Node tmp = rest;
+        rest = rest->next;
+        
+        tmp->next = first;
+        first = tmp;
+    }
+    
+    l->head = first;
+
+}
+

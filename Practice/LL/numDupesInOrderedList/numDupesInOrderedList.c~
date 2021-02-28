@@ -1,0 +1,29 @@
+
+#include "list.h"
+
+int numDupesInOrderedList(List l) {
+	
+	int dupCount = 0;
+	if (l == NULL) return dupCount;
+	
+	Node prev = l->head;
+	Node curr = l->head;
+	curr = curr->next;
+	
+	while(prev->next != NULL) {
+	    
+	    while(curr != NULL) {
+	        
+	        if (prev->value == curr->value) {
+	            dupCount++;
+	        }
+	        
+	        curr = curr->next;
+	    }
+	    
+	    prev = prev->next;
+	}
+	
+	return dupCount;
+}
+

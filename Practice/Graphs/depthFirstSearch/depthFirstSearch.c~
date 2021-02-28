@@ -1,0 +1,34 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "Graph.h"
+
+struct graph {
+	int nV;
+	bool **edges;
+};
+
+void DFS(Graph g, int *visited, int nV, int v);
+
+
+
+void depthFirstSearch(Graph g, int src) {
+	
+	int *visited = calloc(g->nV, sizeof(int));
+	
+	DFS(g, visited, g->nV, src);
+	
+	free (visited);
+}
+
+void DFS(Graph g, int *visited, int nV, int v) {
+    
+    printf("%d ", v);
+    visited[v] = 1;
+    
+    for (int w = 0; w < nV; w++) {
+        if (!visited[w] && g->edges[v][w] == true) DFS(g, visited, nV, w);
+    }
+    
+}

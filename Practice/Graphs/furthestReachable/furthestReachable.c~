@@ -1,0 +1,75 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "Graph.h"
+#include "Queue.h"
+
+struct graph {
+	int nV;
+	bool **edges;
+};
+
+int breadthFirstSearch(Graph g, Vertex src, Vertex dest);
+
+int furthestReachable(Graph g, int src) {
+	
+	int *distances = calloc(g->nV, sizeof(int));
+	
+	Vertex furthest = 0;
+	int longest_dist = 0;
+	
+	for (Vertex dest = 0; dest < g->nV; dest++) {
+	    
+	    distances[dest] = breadthFirstSearch(g, src, dest);
+	    
+	    if (distances[dest] >= longest_dist) {
+	        longest_dist = distances[dest];
+	        furthest = dest;
+	    }
+	}
+	
+	if (longest_dist == 0) furthest = src;
+	
+	free(distances);
+	
+	return furthest;
+	
+}
+
+int breadthFirstSearch(Graph g, Vertex src, Vertex dest) {
+	
+	Queue q = QueueNew();
+	QueueEnqueue(q, src);
+	
+	int *visited = calloc(g->nV, sizeof(int));
+	for (int i = 0; i < g->nV; i++) visited[i] = -1;
+	
+	visited[src] = src;
+	
+	bool found = false;
+	
+	while(!QueueIsEmpty(q) && !found) {
+	    
+	    Vertex v = QueueDequeue(q);
+	    
+	    if (v == dest) found = true;
+	    else {
+	        for (Vertex w = 0; w < g->nV; w++) {
+	            if(visited[w] == -1 && g->edges[v][w] == true) {
+	                visited[w] = v;
+	                QueueEnqueue(q, w);
+	            }
+	        }    
+	    }	    
+	}
+	
+	int path_count = 0;
+	if (found) for (int i = dest; i != src; i = visited[i]) path_count++;
+	
+	free(visited);
+	QueueFree(q);
+	
+	// returns 0 if not connected to any other vertices
+	return path_count;
+}

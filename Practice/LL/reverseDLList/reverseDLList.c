@@ -1,0 +1,20 @@
+
+#include "list.h"
+
+void reverseDLList(List l) {
+	
+	if (l->first == NULL || l->first == l->last) return;
+	
+	Node tmp = l->first;
+	l->first = l->last;
+	l->last = tmp;
+	
+	for (Node curr = l->first; curr != NULL; curr = curr->next) {
+	    
+	    tmp = curr->next;
+	    curr->next = curr->prev;
+	    curr->prev = tmp;
+	}
+	
+}
+

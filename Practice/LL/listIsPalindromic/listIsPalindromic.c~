@@ -1,0 +1,21 @@
+
+#include "list.h"
+
+bool listIsPalindromic(List l) {
+	
+	Node left = l->first;
+	Node right = l->last;
+	
+	if (left == NULL) return true;
+	
+	while (left != right) {
+	    
+	    if (left->value != right->value) return false;
+	    
+	    left = left->next;
+	    rigt = right->prev;
+	}
+	
+	return true;
+}
+

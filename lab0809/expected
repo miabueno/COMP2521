@@ -1,0 +1,57 @@
+Least-hops route:
+Berlin
+->Chicago
+Least-hops route:
+Sydney
+->Honolulu
+->Chicago
+Least-hops route:
+Sydney
+->Shanghai
+->London
+Least-hops route:
+London
+->Shanghai
+->Sydney
+Least-hops route:
+Sydney
+->Honolulu
+->Chicago
+->Buenos Aires
+Least-hops route:
+Sydney
+->Guam
+->Manila
+->Bombay
+->Baghdad
+->London
+No route from Sydney to Buenos Aires
+Least-hops route:
+Sydney
+->Guam
+->Honolulu
+->Chicago
+->Panama City
+->Buenos Aires
+Least-hops route:
+Sydney
+->Guam
+->Honolulu
+->Mexico City
+->Buenos Aires
+Least-hops route:
+Sydney
+->Bombay
+->Azores
+->Buenos Aires
+Least-hops route:
+Sydney
+->Buenos Aires
+Least-hops route:
+Bombay
+->Istanbul
+->Azores
+->Montreal
+->Chicago
+Least-hops route:
+Sydney

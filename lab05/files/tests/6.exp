@@ -1,0 +1,120 @@
+Runway Landing Scheduler v1.0
+Enter ? to see the list of commands.
+> + 3 18 1200
+Successfully added Mar 18 12:00 to the schedule!
+> + 3 18 1200
+Couldn't add Mar 18 12:00 to the schedule!
+> s 1
+Mar 18 12:00
+> + 3 18 1209
+Couldn't add Mar 18 12:09 to the schedule!
+> s 1
+Mar 18 12:00
+> s 2
+Mar 18 12:00 (height: 0)
+> + 3 18 1210
+Couldn't add Mar 18 12:10 to the schedule!
+> + 3 18 1211
+Successfully added Mar 18 12:11 to the schedule!
+> + 3 18 0945
+Successfully added Mar 18 09:45 to the schedule!
+> s 2
+Mar 18 12:00 (height: 1)
+┝━╸L: Mar 18 09:45 (height: 0)
+┕━╸R: Mar 18 12:11 (height: 0)
+> + 3 18 0955
+Couldn't add Mar 18 09:55 to the schedule!
+> + 3 18 0956
+Successfully added Mar 18 09:56 to the schedule!
+> + 3 18 1005
+Couldn't add Mar 18 10:05 to the schedule!
+> + 3 18 1007
+Successfully added Mar 18 10:07 to the schedule!
+> + 3 18 1222
+Successfully added Mar 18 12:22 to the schedule!
+> + 3 18 1253
+Successfully added Mar 18 12:53 to the schedule!
+> + 3 18 1243
+Couldn't add Mar 18 12:43 to the schedule!
+> s 2
+Mar 18 12:00 (height: 2)
+┝━╸L: Mar 18 09:56 (height: 1)
+│     ┝━╸L: Mar 18 09:45 (height: 0)
+│     ┕━╸R: Mar 18 10:07 (height: 0)
+┕━╸R: Mar 18 12:22 (height: 1)
+      ┝━╸L: Mar 18 12:11 (height: 0)
+      ┕━╸R: Mar 18 12:53 (height: 0)
+> n
+7 landing times have been added to the schedule.
+> + 3 18 1242
+Successfully added Mar 18 12:42 to the schedule!
+> s 1
+Mar 18 09:45
+Mar 18 09:56
+Mar 18 10:07
+Mar 18 12:00
+Mar 18 12:11
+Mar 18 12:22
+Mar 18 12:42
+Mar 18 12:53
+> s 2
+Mar 18 12:00 (height: 3)
+┝━╸L: Mar 18 09:56 (height: 1)
+│     ┝━╸L: Mar 18 09:45 (height: 0)
+│     ┕━╸R: Mar 18 10:07 (height: 0)
+┕━╸R: Mar 18 12:22 (height: 2)
+      ┝━╸L: Mar 18 12:11 (height: 0)
+      ┕━╸R: Mar 18 12:53 (height: 1)
+            ┕━╸L: Mar 18 12:42 (height: 0)
+> n
+8 landing times have been added to the schedule.
+> + 3 18 1254
+Couldn't add Mar 18 12:54 to the schedule!
+> + 3 18 1302
+Couldn't add Mar 18 13:02 to the schedule!
+> + 3 18 1303
+Couldn't add Mar 18 13:03 to the schedule!
+> + 3 18 1304
+Successfully added Mar 18 13:04 to the schedule!
+> s 1
+Mar 18 09:45
+Mar 18 09:56
+Mar 18 10:07
+Mar 18 12:00
+Mar 18 12:11
+Mar 18 12:22
+Mar 18 12:42
+Mar 18 12:53
+Mar 18 13:04
+> s 2
+Mar 18 12:00 (height: 3)
+┝━╸L: Mar 18 09:56 (height: 1)
+│     ┝━╸L: Mar 18 09:45 (height: 0)
+│     ┕━╸R: Mar 18 10:07 (height: 0)
+┕━╸R: Mar 18 12:22 (height: 2)
+      ┝━╸L: Mar 18 12:11 (height: 0)
+      ┕━╸R: Mar 18 12:53 (height: 1)
+            ┝━╸L: Mar 18 12:42 (height: 0)
+            ┕━╸R: Mar 18 13:04 (height: 0)
+> n
+9 landing times have been added to the schedule.
+> + 3 18 0936
+Couldn't add Mar 18 09:36 to the schedule!
+> + 3 18 0935
+Couldn't add Mar 18 09:35 to the schedule!
+> + 3 18 0934
+Successfully added Mar 18 09:34 to the schedule!
+> n
+10 landing times have been added to the schedule.
+> s 2
+Mar 18 12:00 (height: 3)
+┝━╸L: Mar 18 09:56 (height: 2)
+│     ┝━╸L: Mar 18 09:45 (height: 1)
+│     │     ┕━╸L: Mar 18 09:34 (height: 0)
+│     ┕━╸R: Mar 18 10:07 (height: 0)
+┕━╸R: Mar 18 12:22 (height: 2)
+      ┝━╸L: Mar 18 12:11 (height: 0)
+      ┕━╸R: Mar 18 12:53 (height: 1)
+            ┝━╸L: Mar 18 12:42 (height: 0)
+            ┕━╸R: Mar 18 13:04 (height: 0)
+> 

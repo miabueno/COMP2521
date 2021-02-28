@@ -1,0 +1,58 @@
+/*
+    Note: We can assume we are not given an empty list
+*/
+
+
+#include "list.h"
+
+int listDeleteLargest(List l) {
+	
+	Node largest = l->head;
+	int largestVal = l->head->value;
+	
+	// if there is only ONE node in the LL
+	if (l->head->next == NULL) {
+	    l->head = NULL;
+	    free(largest);
+	    return largestVal;
+	}
+	
+	// current node pointer
+	Node curr = l->head->next;
+	
+	// previous node pointer
+	Node prev = l->head;
+	
+	// temporary node pointer to the previous value of the largest
+	Node tmpPrev = NULL;
+	
+	while (curr != NULL) {
+	    
+	    if (largest->value < curr->value) {
+	        
+	        largest = curr;
+	        tmpPrev = prev;
+
+	        largestVal = largest->value; 
+	    }
+	    
+	    curr = curr->next;
+	    prev = prev->next;
+	}
+
+    // if the largest is the last item in list
+    if (largest->next == NULL) tmpPrev->next = NULL;  
+          
+    // if the largest is the first item in list 
+    else if (tmpPrev == NULL) l->head = largest->next;
+    
+    // if the largest is in the middle
+    else tmpPrev->next = largest->next;
+
+
+    free(largest);
+
+    return largestVal;
+}
+
+

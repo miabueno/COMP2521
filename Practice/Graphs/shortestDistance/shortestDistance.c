@@ -1,0 +1,56 @@
+/*
+    BFS and distance is from counting visited values from dest to src
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "Graph.h"
+#include "Queue.h"
+
+struct graph {
+    int nV;
+    bool **edges;
+};
+
+int shortestDistance(Graph g, int src, int dest) {
+	
+	Queue q = QueueNew();
+	QueueEnqueue(q, src);
+	
+	int *visited = calloc(g->nV, sizeof(int));
+	for (int i = 0; i < g->nV; i++) visited[i] = -1;
+	
+	visited[src] = src;
+	
+	bool found = false;
+	
+	while(!QueueIsEmpty(q) && !found) {
+	    
+	    Vertex v = QueueDequeue(q);
+	    
+	    if (v == dest) found = true;
+	    else {
+	    
+	        for (Vertex w = 0; w < g->nV; w++) {
+	            
+	            if(visited[w] == -1 && g->edges[v][w] == true) {
+	                
+	                visited[w] = v;
+	                QueueEnqueue(q, w);
+	            }
+	        }  
+	    }
+	}
+	
+	int distance = 0;
+	
+	if (found) for (int i = dest; i != src; i = visited[i]) distance++;
+	else distance = -1;
+	
+	free(visited);
+	QueueFree(q);
+	
+	return distance;
+}
+

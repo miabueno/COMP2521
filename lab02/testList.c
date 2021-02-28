@@ -1,0 +1,471 @@
+// testList.c - testing DLList data type
+// Written by John Shepherd, March 2013
+
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "DLList.h"
+
+int main (void)
+{
+	DLList myList = newDLList();
+	assert (validDLList (myList));
+	
+	printf("=========================================\n");
+	printf("Current list:\n");
+	putDLList (stdout, myList);
+	
+	size_t myList_length = DLListLength (myList);
+	printf("\nCurrent size:\n");
+	printf("%d\n", (int)myList_length);
+
+	printf("=========================================\n");
+	printf("Testing function DLListBefore\n");
+	printf("=========================================\n");
+	
+	/* 
+        BEFORE - TEST 0 
+    */
+    printf("Test 0: Adding a node before the current\n");
+	printf("When current is EMPTY\n");
+	printf("\nExpected Output:\n");
+	printf("T0 sliding into your dms\n");
+	
+	DLListBefore (myList, "T0 sliding into your dms");
+	
+	// checking the length of the list has changed
+	assert(DLListLength (myList) == myList_length+1);
+	
+	// checking the list is valid
+	assert (validDLList (myList));
+	
+	// output is stdout - should see the new myList
+	printf("\nActual Output:\n");
+	putDLList (stdout, myList);
+	myList_length++;
+
+	/* 
+	    BEFORE - TEST 1 
+	*/
+	printf("=========================================\n");
+    printf("Test 1: Adding a node before the current\n");
+	printf("When current is first\n");
+	printf("\nExpected Output:\n");
+	printf("T1 sliding into your dms\n"); 
+	printf("T0 sliding into your dms\n");
+	DLListBefore (myList, "T1 sliding into your dms");
+    assert(DLListLength (myList) == myList_length+1);
+	assert (validDLList (myList));
+	printf("\nActual Output:\n");
+	putDLList (stdout, myList);
+    myList_length++;
+	
+    /* 
+	    BEFORE - TEST 2
+	*/
+	printf("=========================================\n");
+    printf("Test 2: Adding a node before current\n");
+	printf("When current is after first\n");
+    printf("\nExpected Output:\n");
+    printf("T1 sliding into your dms\n"); 
+	printf("T2 sliding into your dms\n");
+	printf("T0 sliding into your dms\n");
+        
+    // Moving current to 2nd node of the list (not first)
+    DLListMoveTo (myList, 2);
+        
+    DLListBefore (myList, "T2 sliding into your dms");
+    assert(DLListLength (myList) == myList_length+1);
+    assert (validDLList (myList));
+	printf("\nActual Output:\n");
+	putDLList (stdout, myList);
+    myList_length++;
+    
+    /*
+        BEFORE - TEST 3 
+	*/
+	printf("=========================================\n");
+    printf("Test 3: Adding a node before current\n");
+	printf("When current is last\n");
+	printf("\nExpected Output:\n");
+    printf("T1 sliding into your dms\n"); 
+	printf("T2 sliding into your dms\n");
+	printf("T3 sliding into your dms\n");
+	printf("T0 sliding into your dms\n");
+	
+    // Moving current to last node of the list
+    DLListMoveTo (myList, (int)myList_length);
+
+    DLListBefore (myList, "T3 sliding into your dms");
+    assert(DLListLength (myList) == myList_length + 1);
+	assert (validDLList (myList));
+	printf("\nActual Output:\n");
+	putDLList (stdout, myList);
+	myList_length++;
+	
+	/*
+	    BEFORE - TEST 4
+	*/
+	printf("=========================================\n");
+    printf("Test 4: Adding a node before current\n");
+	printf("When current is in the middle (even)\n");
+	printf("\nExpected Output:\n");
+    printf("T1 sliding into your dms\n");
+    printf("T4 sliding into your dms\n"); 
+	printf("T2 sliding into your dms\n");
+	printf("T3 sliding into your dms\n");
+	printf("T0 sliding into your dms\n");
+	
+    // Moving current to middle node of the list 
+    // when myList_length % 2 == 0
+    DLListMoveTo (myList, (int)(myList_length/2));
+
+    DLListBefore (myList, "T4 sliding into your dms");
+    assert(DLListLength (myList) == myList_length + 1);
+	assert (validDLList (myList));
+	printf("\nActual Output:\n");
+	putDLList (stdout, myList);
+	myList_length++;
+	
+	/*
+	    BEFORE - TEST 5
+	*/
+	printf("=========================================\n");
+    printf("Test 5: Adding a node before current\n");
+	printf("When current is in the middle (odd)\n");
+	printf("\nExpected Output:\n");
+    printf("T1 sliding into your dms\n");
+    printf("T4 sliding into your dms\n");
+    printf("T5 sliding into your dms\n");  
+	printf("T2 sliding into your dms\n");
+	printf("T3 sliding into your dms\n");
+	printf("T0 sliding into your dms\n");
+	
+    // Moving current to middle node of the list 
+    // when myList_length % 2 != 0
+    DLListMoveTo (myList, (int)(myList_length/2 + 1));
+
+    DLListBefore (myList, "T5 sliding into your dms");
+    assert(DLListLength (myList) == myList_length + 1);
+	assert (validDLList (myList));
+	printf("\nActual Output:\n");
+	putDLList (stdout, myList);
+	myList_length++;
+	
+	printf("=========================================\n");
+	printf("End of Testing: DLListBefore\n");
+	printf("=========================================\n");
+	printf("Current list:\n");
+	putDLList (stdout, myList);
+	printf("\nCurrent size:\n");
+	printf("%d\n", (int)myList_length);
+
+    printf("=========================================\n");
+	printf("Deleting Current List, Starting Empty\n");
+	printf("=========================================\n");
+	freeDLList (myList);
+	
+	myList = newDLList();
+	assert (validDLList (myList));
+	
+	printf("Current list:\n");
+	putDLList (stdout, myList);
+	
+	myList_length = DLListLength (myList);
+	printf("\nCurrent size:\n");
+	printf("%d\n", (int)myList_length);
+
+	printf("=========================================\n");
+	printf("Testing function DLListAfter\n");
+	printf("=========================================\n");
+	
+	/* 
+	    AFTER - TEST 0 
+	*/
+	printf("Test 0: Adding a node after the current\n");
+    printf("When current is EMPTY\n");
+    
+    printf("\nExpected Output:\n");
+    printf("T0 sliding into your dms\n");
+	
+    DLListAfter (myList, "T0 sliding into your dms");
+    assert(DLListLength (myList) == myList_length + 1);
+	assert (validDLList (myList));
+	printf("\nActual Output:\n");
+	putDLList (stdout, myList);
+	myList_length++;
+	
+	/* 
+	    AFTER - TEST 1 
+	*/
+	printf("=========================================\n");
+    printf("Test 1: Adding a node after the current\n");
+	printf("When current is first\n");
+	
+	printf("\nExpected Output:\n");
+	printf("T0 sliding into your dms\n");
+	printf("T1 sliding into your dms\n");
+	 
+	DLListAfter (myList, "T1 sliding into your dms");
+    assert(DLListLength (myList) == myList_length+1);
+	assert (validDLList (myList));
+	printf("\nActual Output:\n");
+	putDLList (stdout, myList);
+    myList_length++;
+    
+    /* 
+	    AFTER - TEST 2 
+	*/
+	printf("=========================================\n");
+    printf("Test 2: Adding a node after current\n");
+	printf("When current is after first\n");
+	
+	printf("\nExpected Output:\n");
+	printf("T0 sliding into your dms\n");
+	printf("T1 sliding into your dms\n");
+	printf("T2 sliding into your dms\n");
+	
+	// Moving current to 2nd node of the list (not first)
+    DLListMoveTo (myList, 2);
+	 
+	DLListAfter (myList, "T2 sliding into your dms");
+    assert(DLListLength (myList) == myList_length+1);
+	assert (validDLList (myList));
+	printf("\nActual Output:\n");
+	putDLList (stdout, myList);
+    myList_length++;
+    
+    /*
+        AFTER - TEST 3 
+	*/
+	printf("=========================================\n");
+    printf("Test 3: Adding a node after current\n");
+	printf("When current is last\n");
+	printf("\nExpected Output:\n");
+    printf("T0 sliding into your dms\n");
+	printf("T1 sliding into your dms\n");
+	printf("T2 sliding into your dms\n");
+	printf("T3 sliding into your dms\n");
+	
+    // Moving current to last node of the list
+    DLListMoveTo (myList, (int)myList_length);
+
+    DLListAfter (myList, "T3 sliding into your dms");
+    assert(DLListLength (myList) == myList_length + 1);
+	assert (validDLList (myList));
+	printf("\nActual Output:\n");
+	putDLList (stdout, myList);
+	myList_length++; 
+    
+    /*
+	    AFTER - TEST 4
+	*/
+	printf("=========================================\n");
+    printf("Test 4: Adding a node after current\n");
+	printf("When current is in the middle (even)\n");
+	printf("\nExpected Output:\n");
+    printf("T0 sliding into your dms\n");
+	printf("T1 sliding into your dms\n");
+	printf("T4 sliding into your dms\n");
+	printf("T2 sliding into your dms\n");
+	printf("T3 sliding into your dms\n");
+	
+    // Moving current to last node of the list
+    DLListMoveTo (myList, (int)(myList_length/2));
+
+    DLListAfter (myList, "T4 sliding into your dms");
+    assert(DLListLength (myList) == myList_length + 1);
+	assert (validDLList (myList));
+	printf("\nActual Output:\n");
+	putDLList (stdout, myList);
+	myList_length++;
+	
+	/*
+	    AFTER - TEST 5
+	*/
+	printf("=========================================\n");
+    printf("Test 5: Adding a node before current\n");
+	printf("When current is in the middle (odd)\n");
+	printf("\nExpected Output:\n");
+    printf("T0 sliding into your dms\n");
+	printf("T1 sliding into your dms\n");
+	printf("T4 sliding into your dms\n");
+	printf("T5 sliding into your dms\n");
+	printf("T2 sliding into your dms\n");
+	printf("T3 sliding into your dms\n");
+	
+    // Moving current to last node of the list
+    DLListMoveTo (myList, (int)(myList_length/2 + 1));
+
+    DLListAfter (myList, "T5 sliding into your dms");
+    assert(DLListLength (myList) == myList_length + 1);
+	assert (validDLList (myList));
+	printf("\nActual Output:\n");
+	putDLList (stdout, myList);
+	myList_length++;
+	
+	printf("=========================================\n");
+	printf("End of Testing: DLListBefore\n");
+	printf("=========================================\n");
+	printf("Current list:\n");
+	putDLList (stdout, myList);
+	printf("\nCurrent size:\n");
+	printf("%d\n", (int)myList_length);
+	
+	printf("=========================================\n");
+	printf("Testing function DLListDelete\n");
+	printf("=========================================\n");
+	
+	/*
+	    DELETE - TEST 0
+	*/
+    printf("Test 0: Deleting current node\n");
+	printf("When current is the first of many\n");
+	printf("\nExpected Output:\n");
+	printf("T1 sliding into your dms\n");
+	printf("T4 sliding into your dms\n");
+	printf("T5 sliding into your dms\n");
+	printf("T2 sliding into your dms\n");
+	printf("T3 sliding into your dms\n");
+	
+	// Moving current to first node of the list
+    DLListMoveTo (myList, (int)(1));
+	
+	// WHEN Current is First
+	DLListDelete (myList);
+	assert(DLListLength (myList) == myList_length - 1);
+    assert (validDLList (myList));
+	printf("\nActual Output:\n");
+	putDLList (stdout, myList);
+	myList_length--;
+	
+	/*
+	    DELETE - TEST 1
+	*/
+	printf("=========================================\n");
+    printf("Test 1: Deleting current node\n");
+	printf("When current is the last of many\n");
+	printf("\nExpected Output:\n");
+	printf("T1 sliding into your dms\n");
+	printf("T4 sliding into your dms\n");
+	printf("T5 sliding into your dms\n");
+	printf("T2 sliding into your dms\n");
+	
+	// Moving current to last node of the list
+    DLListMoveTo (myList, (int)myList_length);
+	
+	// WHEN Current is Last
+	DLListDelete (myList);
+	assert(DLListLength (myList) == myList_length - 1);
+	assert (validDLList (myList));
+	printf("\nActual Output:\n");
+	putDLList (stdout, myList);
+	myList_length--;
+	
+	/*
+	    DELETE - TEST 2
+	*/
+	printf("=========================================\n");
+    printf("Test 2: Deleting current node\n");
+	printf("When current is in the middle\n");
+	printf("\nExpected Output:\n");
+	printf("T1 sliding into your dms\n");
+	printf("T5 sliding into your dms\n");
+	printf("T2 sliding into your dms\n");
+	
+	// Moving current to middle node of the list
+    DLListMoveTo (myList, (int)(myList_length/2));
+	
+	// WHEN Current is Middle
+	DLListDelete (myList);
+	assert(DLListLength (myList) == myList_length - 1);
+	assert (validDLList (myList));
+	printf("\nActual Output:\n");
+	putDLList (stdout, myList);
+	myList_length--;
+	
+	/*
+	    DELETE - TEST 3
+	*/
+	printf("=========================================\n");
+    printf("Test 3: Deleting current node\n");
+	printf("When current is in the middle (next)\n");
+	printf("\nExpected Output:\n");
+	printf("T1 sliding into your dms\n");
+	printf("T2 sliding into your dms\n");
+	
+	// Don't need to move since previous deletion moves curr
+	// to the next node
+    
+	// WHEN Current is Middle
+	DLListDelete (myList);
+	assert(DLListLength (myList) == myList_length - 1);
+	assert (validDLList (myList));
+	printf("\nActual Output:\n");
+	putDLList (stdout, myList);
+	myList_length--;
+	
+	/*
+	    DELETE - TEST 4
+	*/
+	printf("=========================================\n");
+    printf("Test 4: Deleting current node\n");
+	printf("When current is in the next (last)\n");
+	printf("\nExpected Output:\n");
+	printf("T1 sliding into your dms\n");
+	
+	// WHEN Current is Middle/Last
+	DLListDelete (myList);
+	assert(DLListLength (myList) == myList_length - 1);
+    assert (validDLList (myList));
+	printf("\nActual Output:\n");
+	putDLList (stdout, myList);
+	myList_length--;
+	
+	
+	/*
+	    DELETE - TEST 5
+	*/
+	printf("=========================================\n");
+    printf("Test 5: Deleting current node\n");
+	printf("When current is alone\n");
+	printf("\nExpected Output:\n");
+	
+	// WHEN Current is Alone
+	DLListDelete (myList);
+	assert(DLListLength (myList) == myList_length - 1);
+	assert (validDLList (myList));
+	printf("\nActual Output:\n");
+	putDLList (stdout, myList);
+	
+	/*
+	    DELETE - TEST 6
+	*/
+	printf("\n=========================================\n");
+    printf("Test 6: Deleting current node\n");
+	printf("When current is NULL\n");
+	printf("\nExpected Output:\n");
+	
+	// WHEN Current is NULL
+	DLListDelete (myList);
+	printf("\nActual Output:\n");
+	putDLList (stdout, myList);
+	myList_length--;
+	
+	printf("\n=========================================\n");
+	printf("End of Testing: DLListDelete\n");
+	printf("=========================================\n");
+	
+	printf("Current list:\n");
+	putDLList (stdout, myList);
+	printf("\nCurrent size:\n");
+	printf("%d\n", (int)myList_length);
+	
+	printf("=========================================\n");
+	printf("SUCCESS Give me a HD! :)\n");
+	printf("=========================================\n");
+	
+	freeDLList (myList);
+	return EXIT_SUCCESS;
+}
